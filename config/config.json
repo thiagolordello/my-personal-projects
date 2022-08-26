@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "trybe12345",
+    "database": "todolist_dev_bd",
+    "host": "127.0.2.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "trybe12345",
+    "database": "todolist_test_bd",
+    "host": "127.0.2.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "trybe12345",
+    "database": "todolist_prod_bd",
+    "host": "127.0.2.1",
+    "dialect": "mysql"
+  }
+}
