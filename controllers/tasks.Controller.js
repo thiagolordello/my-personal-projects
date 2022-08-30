@@ -6,7 +6,7 @@ const tasksByUserContrl = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await getAllTaskByUser(id);
-    return res.status(201).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

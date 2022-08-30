@@ -10,6 +10,6 @@ app.use(cors());
 app.use('/login', routes.loginRouter);
 app.use('/register', routes.registerRouter);
 app.use('/tasks', tknMidd, routes.tasksByUserContrl);
-app.listen(3000, () => {
-  console.log('Escutando na porta 3000');
+app.listen(3001, () => {
+  console.log('Escutando na porta 3001');
 });

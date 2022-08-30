@@ -11,11 +11,11 @@ const loginUser = async (nameUser, passwordUser) => {
   const { name, /* password, */ id } = result;
 
   const jwt = JWTGenerator({ data: nameUser, id });
-
   return {
     name,
     /* password, */
     token: jwt,
+    id,
   };
 };
 
