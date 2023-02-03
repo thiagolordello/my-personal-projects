@@ -9,7 +9,7 @@ const userLogin = async (req, res) => {
   try {
     const alreadyExist = await service.loginUser(name, encdodedPass);
 
-    if (alreadyExist === null) return res.status(404).json({ message: 'Usuário não encontrado' });
+    if (alreadyExist === null) return res.status(404).json({ message: 'Usuário ou senha não encontrado' });
 
     return res.status(200).json(alreadyExist);
   } catch (error) {
