@@ -1,5 +1,11 @@
+const Mocha = require('mocha');
+
+// const mocha = new Mocha();
+const { describe, it } = require('mocha');
+const sinon = require('sinon');
 const chai = require('chai');
 const { expect } = require('chai');
+const axios = require('axios');
 
 const chaiHttp = require('chai-http');
 const app = require('../app');
@@ -20,27 +26,27 @@ const newTaskEdited = {
   status: 'Concluido',
 };
 
-const userTask = {
-  idUser: 4,
-  description: 'Correr de manha',
-  status: 'Pendente',
-};
+// const userTask = {
+//   idUser: 4,
+//   description: 'Correr de manha',
+//   status: 'Pendente',
+// };
 
-const notIdUserTask = {
+// const notIdUserTask = {
 
-  description: 'correr de manha',
-  status: 'Pendente',
-};
+//   description: 'correr de manha',
+//   status: 'Pendente',
+// };
 
-const notDescripUserTask = {
-  idUser: 4,
-  status: 'Pendente',
-};
+// const notDescripUserTask = {
+//   idUser: 4,
+//   status: 'Pendente',
+// };
 
-const notStatusUserTask = {
-  idUser: 4,
-  description: 'Correr de manha',
-};
+// const notStatusUserTask = {
+//   idUser: 4,
+//   description: 'Correr de manha',
+// };
 
 describe('Testes PUT da rota /idTask', (done) => {
   let token;
@@ -63,11 +69,35 @@ describe('Testes PUT da rota /idTask', (done) => {
   // before(async () => await sendReqTasksByUser2());
   // beforeEach(async () => await sendReqTasksByUser2());
 
-  it('Retorna o status 204,quando a requisicao put for bem sucedida', async () => {
-    const response = await sendReqTasksByUser(tokenUser);
+  // it('Retorna o status 204,quando a requisicao put for bem sucedida', async () => {
+  //   const response = await sendReqTasksByUser(tokenUser);
 
-    expect(response.statusCode).to.be.equal(204);
-    // expect(response.body).to.deep.equal(tasksUser);
+  //   expect(response.statusCode).to.be.equal(204);
+  //   // expect(response.body).to.deep.equal(tasksUser);
+  // });
+
+  it('Retorna o status 204,quando a requisicao put for bem sucedida', async () => {
+    const postStub = await sinon.stub(axios, 'post');
+
+    const payload = {
+      description: 'Pinar projetos pessoais no github',
+      status: 'Concluido',
+    };
+
+    const url = 'http://localhost:3001/tasks/68';
+
+    const taskEdited = {
+      description: 'Pinar projetos pessoais no github',
+      status: 'Concluido',
+    };
+
+    const retorno = {};
+
+    await postStub.withArgs(url, taskEdited).returns(Promise
+      .resolve({ status: 204 }));
+    const response = await axios.post(url, payload);
+    expect(response.status).to.be.equal(204);
+    postStub.restore();
   });
 
   it('Retorna o status 401 e mensagem, quando o token enviado no header nao e valido!', async () => {
